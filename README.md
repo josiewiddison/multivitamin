@@ -36,3 +36,9 @@ Semantic headings, keyboard disclosures, skip link, focus outlines, fixed purcha
 ## Limitations
 
 Independent editorial concept, not an official Codeage storefront. Purchase buttons open the original product page; no checkout, payments, subscriptions or analytics. Confirm the directions on the bottles you receive. Individual ingredient amounts and vitamin/mineral amounts are not disclosed; no equivalents to produce servings are claimed.
+
+## Revised art direction
+
+The October 8 reference update replaces the saturated first-pass assets. Current specimens use pale pigments, extremely thin flesh, fine skin outlines and transmitted light. The hero contains four sparse specimens (pear, strawberry, orange and spinach), all present in the label. The five chapters alternate vertical stacks, overlapping specimens and large cropped forms.
+
+Additional nutrition references: USDA ARS Blueberries and Health (https://www.ars.usda.gov/plains-area/gfnd/gfhnrc/docs/news-articles/2014/blueberries-and-health/); NIH ODS Vitamin C (https://ods.od.nih.gov/factsheets/VitaminC-Consumer/) and Folate (https://ods.od.nih.gov/factsheets/Folate-HealthProfessional/).
