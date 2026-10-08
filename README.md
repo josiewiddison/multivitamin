@@ -46,3 +46,9 @@ Additional nutrition references: USDA ARS Blueberries and Health (https://www.ar
 ## Verification
 
 Production build passed. Browser checks covered 1366×768 desktop and 390×844 phone layouts, forward/reverse scrubbed reveal, all eight ingredient/label/FAQ disclosures, image loading, anchor targets, purchase link destinations, no horizontal overflow, and no console errors. The explicit reduced-motion control was tested: pin spacers are removed and the static hero remains readable. The OS preference uses the same animation-disable path; changing the OS preference itself was not tested. No checkout is embedded.
+
+## Cursor fruit interaction
+
+The hero bottles have been removed. Whole transparent specimens now spring up and drop away as the pointer crosses a loose geometric grid. Rectangular clip reveals replace the initial soft wipe. Up to seven slices overlap, and expired nodes/timelines are removed. Fruit cycles through pear, strawberry, orange, blueberry, apple, tomato, spinach and carrot. Apple and tomato are new AI-generated lightbox assets, both ingredients present in the fruit blend. Touch users see a restrained static arrangement and can also trigger pops with a touch gesture; normal vertical scrolling remains available. Reduced-motion users receive the static arrangement without pop or pin animations.
+
+Verified pointer gestures, whole fruit loading, automatic disappearance, reduced-motion cleanup, no hero bottles, phone layout without horizontal overflow, and production build. Screenshot: local preview captured during the gesture. The genuine bottle photograph remains in the purchase section for product identification.
