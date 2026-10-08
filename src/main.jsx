@@ -1,23 +1,225 @@
-import React, {useLayoutEffect,useRef} from 'react';
-import {createRoot} from 'react-dom/client';
-import gsap from 'gsap';
-import {ScrollTrigger} from 'gsap/ScrollTrigger';
-import './style.css';
+import React, { useLayoutEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./style.css";
 gsap.registerPlugin(ScrollTrigger);
-const PRODUCT='https://www.codeage.com/products/amen-fruits-veggies-vitamins-bundle-supplement';
-const ingredients=[
-{name:'Blueberry',color:'#263d9a',title:'Small fruit.\nA wider perspective.',text:'Whole blueberries bring dietary fibre and a naturally colourful addition to a varied diet. Eat them fresh, frozen, or stirred into breakfast.',blend:'Blueberry fruit powder · Fruits blend'},
-{name:'Orange',color:'#ef660b',title:'A little brightness\ngoes a long way.',text:'Whole oranges are a source of vitamin C and dietary fibre. The fruit, the texture, and the pleasure of eating it all belong at the table.',blend:'Orange fruit powder · Fruits blend'},
-{name:'Carrot',color:'#e65b18',title:'See colour\ndifferently.',text:'Carrots contain beta-carotene, which the body can convert to vitamin A. Bring variety to your plate with raw, roasted, or cooked carrots.',blend:'Carrot root powder · Both blends'},
-{name:'Broccoli',color:'#337621',title:'Branch out.',text:'Broccoli adds vitamin C, folate, and fibre to meals. Try it steamed, roasted, or tossed into a dish you already love.',blend:'Broccoli powder, whole head · Veggies blend'},
-{name:'Spinach',color:'#26562b',title:'Make space\nfor green.',text:'Spinach is a dark-green leafy vegetable that contributes folate and vitamin A to a varied diet. Enjoy a mix of leafy greens throughout the week.',blend:'Spinach leaf powder · Veggies blend'}];
-const fruitList='African mango fruit powder, black cherry fruit powder, carrot root powder, apple fruit powder, black currant fruit powder, acerola cherry fruit powder, bilberry fruit powder, banana fruit powder, tomato fruit powder, acai juice powder, lemon peel powder, blueberry fruit powder, pineapple fruit powder, beet root powder, papaya fruit powder, cranberry juice powder, pear fruit powder, strawberry fruit powder, orange fruit powder, blackberry fruit powder, peach fruit powder, pomegranate juice concentrate, raspberry fruit powder.';
-const veggieList='Maitake mushroom powder (fruiting body), chaga mushroom powder (fruiting body), pea protein 85%, broccoli powder (whole head), spinach leaf powder, barley grass powder, carrot root powder, spirulina powder, reishi mushroom powder (fruiting body), alfalfa leaf powder, shiitake mushroom powder (fruiting body), lion’s mane mushroom powder (fruiting body), green tea leaf powder, turkey tail mushroom powder (fruiting body).';
-const caution='Do not exceed the recommended dose. Pregnant or nursing individuals, children under 18, and individuals with a known medical condition should consult a physician before using this or any dietary supplement. Use caution if you have allergies or sensitivities to any listed ingredient. Keep out of reach of children and pets. Do not use if the safety seal is damaged or missing. Store in a cool, dry place. Use as a food supplement only. Do not use for weight reduction.';
-function Buy({children='Shop at Codeage',className=''}){return <a className={`button ${className}`} href={PRODUCT} target="_blank" rel="noreferrer">{children}<span aria-hidden="true">↗</span></a>}
-const slices=[['pear',-8,44,32,-26],['strawberry',78,11,29,22],['orange',83,53,25,-12],['spinach',25,64,13,16]];
-function Hero(){const ref=useRef(null);useLayoutEffect(()=>{const mm=gsap.matchMedia();mm.add('(prefers-reduced-motion: no-preference)',()=>{const ctx=gsap.context(()=>{const mobile=window.innerWidth<700;const tl=gsap.timeline({scrollTrigger:{trigger:ref.current,start:'top top',end:mobile?'+=1000':'+=1700',pin:true,scrub:1,anticipatePin:1}});tl.to('.slice',{x:(i)=>(slices[i][1]-50)*window.innerWidth/35,y:(i)=>(slices[i][2]-50)*window.innerHeight/24,rotation:(i)=>slices[i][4]*3,scale:1.25,duration:1.6,ease:'power1.in'},0).to('.hero-title,.hero-bottom',{opacity:0,duration:.45},.1).to('.bottle-layer',{scale:.82,opacity:0,y:60,duration:.65},.8).fromTo('.reveal',{autoAlpha:0,y:40},{autoAlpha:1,y:0,duration:.75},1.35);},ref);return ()=>ctx.revert();});return ()=>mm.revert();},[]);return <section className="hero" ref={ref} aria-label="Amen Fruits and Veggies bundle"><div className="hero-title"><p className="eyebrow">A DIFFERENT KIND OF DAILY RITUAL</p><h1>FRUITS +<br/>VEGGIES.</h1></div><div className="installation" aria-hidden="true">{slices.map(([name,x,y,w,r],i)=><img key={i} className="slice" src={`/assets/${name}.webp`} style={{left:`${x}%`,top:`${y}%`,width:`${w}%`,transform:`rotate(${r}deg)`}} alt=""/>)}</div><img className="bottle-layer" src="/assets/bottles.webp" alt="Amen Fruits and Amen Veggies, 90 vegetable capsules in each bottle" width="900" height="900"/><div className="hero-bottom"><p>Two plant-based blends.<br/>One everyday ritual.</p><Buy>Explore the bundle</Buy><a className="scroll-cue" href="#variety">SCROLL TO DISCOVER <span>↓</span></a></div><div className="reveal"><p className="eyebrow">LET VARIETY IN</p><h2>MAKE ROOM<br/>FOR VARIETY.</h2><p>Nature doesn’t do one note.<br/>Neither should your plate.</p></div></section>}
-function Chapter({item,index}){const name=item.name.toLowerCase();return <section className={`chapter chapter-${name}`} style={{'--accent':item.color}}><div className="chapter-heading"><span className="eyebrow">{item.blend}</span><h2>{item.name.toUpperCase()}<span>.</span></h2></div><div className="chapter-art" aria-hidden="true"><img loading="lazy" src={`/assets/${name}.webp`} alt="" width="1000" height="1000"/>{(index===0||index===1||index===4)&&<img loading="lazy" className="echo" src={`/assets/${name}.webp`} alt=""/>}{index===0&&<img loading="lazy" className="echo echo-two" src="/assets/blueberry.webp" alt=""/>}</div><div className="chapter-copy"><h3>{item.title.split('\n').map((line,i)=><React.Fragment key={i}>{line}{i===0&&<br/>}</React.Fragment>)}</h3><p>{item.text}</p><span className="fine">WHOLE-FOOD PERSPECTIVE</span></div></section>}
-function Facts(){return <section id="inside" className="inside section-pad"><div className="section-intro"><p className="eyebrow">THE BUNDLE, IN DETAIL</p><h2>TWO BLENDS.<br/>FULL TRANSPARENCY.</h2><p>Fruit powders in one bottle. Vegetables, mushrooms, greens, and herbs in the other. A supplement to a varied diet.</p></div><div className="blend-grid"><article><h3>FRUITS<span>700 mg</span></h3><p>Raw Whole Fruits Blend per capsule</p><p>90 capsules · 90 servings</p><details><summary>Read every ingredient <span>+</span></summary><p>{fruitList}</p><p>Other ingredient: methylcellulose capsule.</p></details></article><article><h3>VEGGIES<span>633 mg</span></h3><p>Raw Whole Veggies Blend per capsule</p><p>90 capsules · 90 servings</p><details><summary>Read every ingredient <span>+</span></summary><p>{veggieList}</p><p>Other ingredient: methylcellulose capsule.</p></details></article></div><details className="label-details"><summary>Supplement facts — original label <span>+</span></summary><p>Serving size: 1 capsule per bottle. Daily Values are not established for either blend. Individual ingredient amounts are not disclosed.</p><a href="/assets/facts.jpg" target="_blank" rel="noreferrer"><img loading="lazy" src="/assets/facts.jpg" alt="Supplement facts: fruit blend 700 mg, vegetable blend 633 mg, serving size one capsule, 90 servings per bottle. Full ingredient lists are provided above." width="2000" height="2000"/><span>Open full-resolution label ↗</span></a></details><p className="fine">VEGAN · NON-GMO · GLUTEN FREE · DAIRY FREE · SOY FREE<br/>Attributes as listed by Codeage. Current label includes shiitake; the product page text omits it.</p></section>}
-function App(){useLayoutEffect(()=>{const mm=gsap.matchMedia();mm.add('(prefers-reduced-motion: no-preference)',()=>{const ctx=gsap.context(()=>{gsap.utils.toArray('.chapter-art').forEach(el=>gsap.fromTo(el,{y:60,rotation:-5},{y:-35,rotation:3,ease:'none',scrollTrigger:{trigger:el.closest('.chapter'),start:'top bottom',end:'bottom top',scrub:1}}));});return ()=>ctx.revert();});return ()=>mm.revert();},[]);return <><a className="skip" href="#variety">Skip to content</a><header><a className="brand" href="#" aria-label="Amen home">AMEN<span>®</span></a><nav aria-label="Main navigation"><a href="#variety">The ingredients</a><a href="#inside">What’s inside</a></nav><Buy className="nav-buy">Shop the bundle</Buy></header><main><Hero/><section id="variety" className="variety section-pad"><p className="eyebrow">A CLOSER LOOK AT NATURE</p><h2>NOTHING ORDINARY.<br/>JUST EVERYDAY FOODS.</h2><div><p>Five ingredients. Five reasons to keep your plate interesting.</p><p>These are editorial selections from the blends, not a ranking by amount. The nutrition described below belongs to whole foods. These capsules do not replace produce or provide the equivalent fibre, nutrients, or benefits of a serving.</p></div></section>{ingredients.map((item,i)=><Chapter key={item.name} item={item} index={i}/>)}<Facts/><section id="routine" className="routine section-pad"><p className="eyebrow">KEEP IT SIMPLE</p><h2>YOUR DAY.<br/>YOUR RITUAL.</h2><div className="routine-body"><span className="big-one">1</span><div><h3>Capsule daily.</h3><p>Codeage’s suggested use: take 1 capsule daily with 8 ounces of water or your favourite beverage. May be taken with or without food.</p><p>Each bottle’s serving size is one capsule. Follow the directions on your own bottle and consult Codeage if the bundle instructions need clarification.</p><a href="#cautions">Read directions & cautions ↓</a></div></div></section><section id="shop" className="purchase section-pad"><div><p className="eyebrow">AMEN FRUITS + VEGGIES BUNDLE</p><h2>A LITTLE<br/>MORE NATURE.</h2><p>Two bottles. 90 vegetable capsules each.</p><p className="price">$46.99 <span>USD · one-time purchase</span></p><Buy>Shop at Codeage</Buy><p className="fine">Available when checked October 8, 2026.<br/>Final price and availability are confirmed at Codeage.<br/>Opens the original retailer’s product page.</p></div><img src="/assets/bottles.webp" loading="lazy" alt="Amen Fruits and Veggies supplement bundle" width="900" height="900"/></section><section className="faq section-pad"><h2>A FEW GOOD<br/>QUESTIONS.</h2>{[['What does the bundle contain?','One bottle of Amen Fruits and one bottle of Amen Veggies, each containing 90 vegetable capsules. The fruit blend is 700 mg per capsule; the veggie blend is 633 mg per capsule.'],['Does this replace eating fruit and vegetables?','No. Enjoy a variety of fruit and vegetables as part of your everyday diet. The supplement is not equivalent to a serving of produce, and the label does not establish amounts of individual vitamins or minerals.'],['Is it suitable for a vegan diet?','Codeage lists the bundle as vegan, plant-based, non-GMO, and free of gluten, dairy, soy, wheat, yeast, and artificial ingredients. Review the complete ingredient list for your own allergies and sensitivities.'],['How do I take it?','The manufacturer states: take 1 capsule daily with 8 ounces of water or your favourite beverage, with or without food. Check your bottle directions. Each bottle has a serving size of one capsule.'],['Who should check with a physician first?',caution]].map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</section></main><footer id="cautions"><div className="footer-top"><a className="brand" href="#">AMEN®</a><p>MAKE ROOM FOR VARIETY.</p><a href="#">Back to top ↑</a></div><div className="footer-notes"><div><p>{caution}</p><p>This product is not intended to diagnose, treat, cure, or prevent any disease. These statements have not been evaluated by the Food and Drug Administration.</p></div><div><p>Product and label source: <a href={PRODUCT}>Codeage</a><br/>Whole-food nutrition: <a href="https://www.myplate.gov/eat-healthy/fruits">USDA MyPlate fruits</a> & <a href="https://www.myplate.gov/eat-healthy/vegetables">vegetables</a>.</p><p>Independent editorial website. Genuine product photographs from Codeage. Botanical imagery generated with AI.</p></div></div><div className="footer-bottom"><span>AMEN FRUITS + VEGGIES</span><span>AN EDITORIAL EXPLORATION · 2026</span></div></footer></>}
-createRoot(document.getElementById('root')).render(<App/>);
+
+import { PRODUCT, ingredients, caution } from "./data";
+import Buy from "./components/Buy";
+import Hero from "./components/Hero";
+import Chapter from "./components/Chapter";
+import Facts from "./components/Facts";
+function App() {
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  useLayoutEffect(() => {
+    if (reduceMotion) return;
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap.utils.toArray(".chapter-art").forEach((el) =>
+          gsap.fromTo(
+            el,
+            { y: 60, rotation: -5 },
+            {
+              y: -35,
+              rotation: 3,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el.closest(".chapter"),
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            },
+          ),
+        );
+      });
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
+  }, [reduceMotion]);
+  return (
+    <>
+      <a className="skip" href="#variety">
+        Skip to content
+      </a>
+      <header>
+        <a className="brand" href="#" aria-label="Amen home">
+          AMEN<span>®</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#variety">The ingredients</a>
+          <a href="#inside">What’s inside</a>
+        </nav>
+        <Buy className="nav-buy">Shop the bundle</Buy>
+      </header>
+      <main className={reduceMotion ? "motion-reduced" : ""}>
+        <Hero reduceMotion={reduceMotion} />
+        <section id="variety" className="variety section-pad">
+          <p className="eyebrow">A CLOSER LOOK AT NATURE</p>
+          <h2>
+            NOTHING ORDINARY.
+            <br />
+            JUST EVERYDAY FOODS.
+          </h2>
+          <div>
+            <p>
+              Five ingredients. Five reasons to keep your plate interesting.
+            </p>
+            <p>
+              These are editorial selections from the blends, not a ranking by
+              amount. The nutrition described below belongs to whole foods.
+              These capsules do not replace produce or provide the equivalent
+              fibre, nutrients, or benefits of a serving.
+            </p>
+          </div>
+        </section>
+        {ingredients.map((item, i) => (
+          <Chapter key={item.name} item={item} index={i} />
+        ))}
+        <Facts />
+        <section id="routine" className="routine section-pad">
+          <p className="eyebrow">KEEP IT SIMPLE</p>
+          <h2>
+            YOUR DAY.
+            <br />
+            YOUR RITUAL.
+          </h2>
+          <div className="routine-body">
+            <span className="big-one">1</span>
+            <div>
+              <h3>Capsule daily.</h3>
+              <p>
+                Codeage’s suggested use: take 1 capsule daily with 8 ounces of
+                water or your favourite beverage. May be taken with or without
+                food.
+              </p>
+              <p>
+                Each bottle’s serving size is one capsule. Follow the directions
+                on your own bottle and consult Codeage if the bundle
+                instructions need clarification.
+              </p>
+              <a href="#cautions">Read directions & cautions ↓</a>
+            </div>
+          </div>
+        </section>
+        <section id="shop" className="purchase section-pad">
+          <div>
+            <p className="eyebrow">AMEN FRUITS + VEGGIES BUNDLE</p>
+            <h2>
+              A LITTLE
+              <br />
+              MORE NATURE.
+            </h2>
+            <p>Two bottles. 90 vegetable capsules each.</p>
+            <p className="price">
+              $46.99 <span>USD · one-time purchase</span>
+            </p>
+            <Buy>Shop at Codeage</Buy>
+            <p className="fine">
+              Available when checked October 8, 2026.
+              <br />
+              Final price and availability are confirmed at Codeage.
+              <br />
+              Opens the original retailer’s product page.
+            </p>
+          </div>
+          <img
+            src="/assets/bottles.webp"
+            loading="lazy"
+            alt="Amen Fruits and Veggies supplement bundle"
+            width="900"
+            height="900"
+          />
+        </section>
+        <section className="faq section-pad">
+          <h2>
+            A FEW GOOD
+            <br />
+            QUESTIONS.
+          </h2>
+          {[
+            [
+              "What does the bundle contain?",
+              "One bottle of Amen Fruits and one bottle of Amen Veggies, each containing 90 vegetable capsules. The fruit blend is 700 mg per capsule; the veggie blend is 633 mg per capsule.",
+            ],
+            [
+              "Does this replace eating fruit and vegetables?",
+              "No. Enjoy a variety of fruit and vegetables as part of your everyday diet. The supplement is not equivalent to a serving of produce, and the label does not establish amounts of individual vitamins or minerals.",
+            ],
+            [
+              "Is it suitable for a vegan diet?",
+              "Codeage lists the bundle as vegan, plant-based, non-GMO, and free of gluten, dairy, soy, wheat, yeast, and artificial ingredients. Review the complete ingredient list for your own allergies and sensitivities.",
+            ],
+            [
+              "How do I take it?",
+              "The manufacturer states: take 1 capsule daily with 8 ounces of water or your favourite beverage, with or without food. Check your bottle directions. Each bottle has a serving size of one capsule.",
+            ],
+            ["Who should check with a physician first?", caution],
+          ].map(([q, a]) => (
+            <details key={q}>
+              <summary>
+                {q}
+                <span>+</span>
+              </summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </section>
+      </main>
+      <footer id="cautions">
+        <div className="footer-top">
+          <a className="brand" href="#">
+            AMEN®
+          </a>
+          <p>MAKE ROOM FOR VARIETY.</p>
+          <a href="#">Back to top ↑</a>
+        </div>
+        <div className="footer-notes">
+          <div>
+            <p>{caution}</p>
+            <p>
+              This product is not intended to diagnose, treat, cure, or prevent
+              any disease. These statements have not been evaluated by the Food
+              and Drug Administration.
+            </p>
+          </div>
+          <div>
+            <p>
+              Product and label source: <a href={PRODUCT}>Codeage</a>
+              <br />
+              Whole-food nutrition:{" "}
+              <a href="https://www.myplate.gov/eat-healthy/fruits">
+                USDA MyPlate fruits
+              </a>{" "}
+              &{" "}
+              <a href="https://www.myplate.gov/eat-healthy/vegetables">
+                vegetables
+              </a>
+              .
+            </p>
+            <p>
+              Independent editorial website. Genuine product photographs from
+              Codeage. Botanical imagery generated with AI.
+            </p>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <button
+            className="motion-control"
+            aria-pressed={reduceMotion}
+            onClick={() => setReduceMotion((value) => !value)}
+          >
+            {reduceMotion ? "Reduced motion on" : "Reduce motion"}
+          </button>
+          <span>AMEN FRUITS + VEGGIES</span>
+          <span>AN EDITORIAL EXPLORATION · 2026</span>
+        </div>
+      </footer>
+    </>
+  );
+}
+createRoot(document.getElementById("root")).render(<App />);

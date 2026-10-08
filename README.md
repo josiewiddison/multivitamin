@@ -42,3 +42,7 @@ Independent editorial concept, not an official Codeage storefront. Purchase butt
 The October 8 reference update replaces the saturated first-pass assets. Current specimens use pale pigments, extremely thin flesh, fine skin outlines and transmitted light. The hero contains four sparse specimens (pear, strawberry, orange and spinach), all present in the label. The five chapters alternate vertical stacks, overlapping specimens and large cropped forms.
 
 Additional nutrition references: USDA ARS Blueberries and Health (https://www.ars.usda.gov/plains-area/gfnd/gfhnrc/docs/news-articles/2014/blueberries-and-health/); NIH ODS Vitamin C (https://ods.od.nih.gov/factsheets/VitaminC-Consumer/) and Folate (https://ods.od.nih.gov/factsheets/Folate-HealthProfessional/).
+
+## Verification
+
+Production build passed. Browser checks covered 1366×768 desktop and 390×844 phone layouts, forward/reverse scrubbed reveal, all eight ingredient/label/FAQ disclosures, image loading, anchor targets, purchase link destinations, no horizontal overflow, and no console errors. The explicit reduced-motion control was tested: pin spacers are removed and the static hero remains readable. The OS preference uses the same animation-disable path; changing the OS preference itself was not tested. No checkout is embedded.
