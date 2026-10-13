@@ -128,7 +128,7 @@ function App() {
             </p>
           </div>
           <img
-            src="/assets/bottles.webp"
+            src="./assets/bottles.webp"
             loading="lazy"
             alt="Amen Fruits and Veggies supplement bundle"
             width="900"

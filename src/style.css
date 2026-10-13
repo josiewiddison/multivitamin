@@ -769,7 +769,7 @@ footer {
 }
 @font-face {
   font-family: Anton;
-  src: url("/assets/Anton-Regular.ttf") format("truetype");
+  src: url("./assets/Anton-Regular.ttf") format("truetype");
   font-display: swap;
   font-weight: 400;
 }

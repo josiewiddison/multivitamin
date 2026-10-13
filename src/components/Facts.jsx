@@ -53,10 +53,10 @@ export default function Facts() {
           Serving size: 1 capsule per bottle. Daily Values are not established
           for either blend. Individual ingredient amounts are not disclosed.
         </p>
-        <a href="/assets/facts.jpg" target="_blank" rel="noreferrer">
+        <a href="./assets/facts.jpg" target="_blank" rel="noreferrer">
           <img
             loading="lazy"
-            src="/assets/facts.jpg"
+            src="./assets/facts.jpg"
             alt="Supplement facts: fruit blend 700 mg, vegetable blend 633 mg, serving size one capsule, 90 servings per bottle. Full ingredient lists are provided above."
             width="2000"
             height="2000"

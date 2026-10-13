@@ -32,7 +32,7 @@ export default function FruitReveal({ staticView = false }) {
 
     const preload = varieties.map((name) => {
       const image = new Image();
-      image.src = `/assets/${name}.webp`;
+      image.src = `./assets/${name}.webp`;
       return image;
     });
 
@@ -56,7 +56,7 @@ export default function FruitReveal({ staticView = false }) {
       if (!(staticView || reduced.matches || coarse.matches)) return;
       for (const [name, x, y, size, rotation] of stillLife) {
         const image = document.createElement("img");
-        image.src = `/assets/${name}.webp`;
+        image.src = `./assets/${name}.webp`;
         image.alt = "";
         image.className = "fruit-pop fruit-pop-static";
         Object.assign(image.style, {
@@ -88,7 +88,7 @@ export default function FruitReveal({ staticView = false }) {
         bounds.width < 700 ? 145 + (index % 3) * 25 : 205 + (index % 3) * 35;
       const rotation = [-12, 0, 12, 0][index % 4];
       const image = document.createElement("img");
-      image.src = `/assets/${name}.webp`;
+      image.src = `./assets/${name}.webp`;
       image.alt = "";
       image.className = "fruit-pop";
       // A loose square grid gives the gesture a crisp, composed rhythm.

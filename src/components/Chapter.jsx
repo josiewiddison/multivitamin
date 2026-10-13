@@ -16,7 +16,7 @@ export default function Chapter({ item, index }) {
       <div className="chapter-art" aria-hidden="true">
         <img
           loading="lazy"
-          src={`/assets/${name}.webp`}
+          src={`./assets/${name}.webp`}
           alt=""
           width="1000"
           height="1000"
@@ -25,7 +25,7 @@ export default function Chapter({ item, index }) {
           <img
             loading="lazy"
             className="echo"
-            src={`/assets/${name}.webp`}
+            src={`./assets/${name}.webp`}
             alt=""
           />
         )}
@@ -33,7 +33,7 @@ export default function Chapter({ item, index }) {
           <img
             loading="lazy"
             className="echo echo-two"
-            src="/assets/blueberry.webp"
+            src="./assets/blueberry.webp"
             alt=""
           />
         )}
